@@ -81,6 +81,21 @@ void Player::move(const std::vector<StaticObject*> soList) {
 	//ˆÚ“®Œã‚ÌÀ•W
 	int movedX = mX + dx;
 	int movedY = mY + dy;
+
+	if (mPlayerDirection == 1 || mPlayerDirection == 3) {
+		// xŽ²‚ÌˆÚ“®
+		int x, y;
+		this->getCell(&x, &y);
+		movedY = convertCellToInner(y);
+	}
+	else if (mPlayerDirection == 0 || mPlayerDirection == 2) {
+		// yŽ²‚ÌˆÚ“®
+		int x, y;
+		this->getCell(&x, &y);
+		movedX = convertCellToInner(x);
+	}
+
+
 	//áŠQ•¨‚ÌÀ•W
 	int wallX, wallY;
 
@@ -170,21 +185,28 @@ void Player::getDirection(int* dx, int* dy) {
 	
 	*dx = *dy = 0;
 
+	mDirectionX = 0;
+	mDirectionY = 0;
+
 	if (GameController::getInstance()->isPressed(GameController::U, mPlayerID) == GameController::Pressed) {
 		*dy = -1;
 		mPlayerDirection = 0;
+		mDirectionY = -1;
 	}
 	else if (GameController::getInstance()->isPressed(GameController::R, mPlayerID) == GameController::Pressed) {
 		*dx = 1;
 		mPlayerDirection = 1;
+		mDirectionX = 1;
 	}
 	else if (GameController::getInstance()->isPressed(GameController::D, mPlayerID) == GameController::Pressed) {
 		*dy = 1;
 		mPlayerDirection = 2;
+		mDirectionY = 1;
 	}
 	else if (GameController::getInstance()->isPressed(GameController::L, mPlayerID) == GameController::Pressed) {
 		*dx = -1;
 		mPlayerDirection = 3;
+		mDirectionX = -1;
 	}
 	else {
 		mPlayerDirection = 4;

@@ -86,11 +86,22 @@ bool DynamicObject::isIntersectWall(int x, int y, int wallX, int wallY) {
 
 	int al = x - HALF_SIZE; //left A
 	int ar = x + HALF_SIZE; //right A
+
+	if (mDirectionX != 0) {
+		al = x - 8000;
+		ar = x + 8000;
+	}
+
 	int bl = wx - 8000; //left B
 	int br = wx + 8000; //right B
 	if ((al < br) && (ar > bl)) {
 		int at = y - HALF_SIZE; //top A
 		int ab = y + HALF_SIZE; //bottom A
+
+		if (mDirectionY != 0) {
+			at = y - 8000;
+			ab = y + 8000;
+		}
 		int bt = wy - 8000; //top B
 		int bb = wy + 8000; //bottom B
 		if ((at < bb) && (ab > bt)) {

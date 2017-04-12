@@ -46,7 +46,7 @@ void GameController::controlFps() {
 //FPSï\é¶ä÷êî
 void GameController::graphFps() {
 	if (mFrameInterval10 != 0) { //0äÑÇËã÷é~
-		DxLib::DrawFormatString(350, 0, GetColor(255, 255, 255), "FPS:%.1f", 10 * 1000 / static_cast<double>(mFrameInterval10));
+		DxLib::DrawFormatString(620, 0, GetColor(255, 255, 255), "FPS:%.1f", 10 * 1000 / static_cast<double>(mFrameInterval10));
 	}
 }
 
