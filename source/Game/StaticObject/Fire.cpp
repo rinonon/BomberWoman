@@ -23,5 +23,20 @@ void Fire::update() {
 }
 
 void Fire::draw() const {
-	DxLib::DrawGraph(mX * 32, mY * 32, ResourceLoader::getInstance()->getHdImg(mGraphHd[mFireType]), TRUE);
+
+	if (mFireType == TYPE_NONE) {
+		return;
+	}
+
+	DxLib::DrawGraph(mX * 32, mY * 32, ResourceLoader::getInstance()->getHdImg(mGraphHd[static_cast<int>(mFireType)]), TRUE);
+}
+
+void Fire::setFireType(Fire::Type type)
+{
+	mFireType = type;
+}
+
+Fire::Type Fire::getFireType()
+{
+	return mFireType;
 }

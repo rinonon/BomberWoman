@@ -5,7 +5,7 @@
 class Fire : public StaticObject {
 public:
 	enum Type {
-		TYPE_X,
+		TYPE_X = 0,
 		TYPE_Y,
 		TYPE_CENTER,
 
@@ -15,6 +15,8 @@ public:
 	~Fire();
 	void draw() const;
 	void update();
+	void setFireType(Fire::Type type);
+	Type getFireType();
 
 private:
 	int mGraphHd[3] = { 5, 6, 4 };

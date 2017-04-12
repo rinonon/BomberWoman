@@ -428,7 +428,7 @@ void State::setFire(int x, int y, int power) {
 			break;
 		}
 		else {
-			FireRef fire(new Fire(i, y, Fire::TYPE_X));
+			FireRef fire(new Fire(i, y, Fire::TYPE_X));		
 			addFireList(fire);
 		}
 	}
@@ -475,6 +475,37 @@ void State::setFire(int x, int y, int power) {
 		else {
 			FireRef fire(new Fire(x, i, Fire::TYPE_Y));
 			addFireList(fire);
+		}
+	}
+
+	for(int i = 0; i < mFireList.size(); i++) {
+		for (int j = i + 1; j < mFireList.size(); j++) {
+
+			FireRef current = mFireList.at(i);
+			FireRef target = mFireList.at(j);
+
+			if (target->getFireType() == Fire::TYPE_NONE) {
+				break;
+			}
+
+			typedef std::pair<int, int> x_y;
+
+			int x, y;
+			x_y current_pos;
+			x_y target_pos;
+
+			current->getCell(&x, &y);
+			current_pos.first = x;
+			current_pos.second = y;
+			
+			target->getCell(&x, &y);
+			target_pos.first = x;
+			target_pos.second = y;
+
+			if (current_pos == target_pos && current->getFireType() != target->getFireType()) {
+				current->setFireType(Fire::Type::TYPE_CENTER);
+				target->setFireType(Fire::Type::TYPE_NONE);
+			}
 		}
 	}
 }
